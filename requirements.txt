@@ -1,0 +1,7 @@
+Python >= 2.6.5
+Django >= 1.6
+PIL >= 1.1.6 or Pillow >= 2.0.0
+django-mptt >= 0.5.1 < 0.6
+django-menu
+sorl
+

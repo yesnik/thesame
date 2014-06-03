@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block slider %}
+    <section id="top">
+        <div class="wrapper">
+            <div id="top_slide" class="flexslider">
+                <ul class="slides">
+                    {% for slide in slides_list %}
+                        <li>
+                            {% thumbnail slide.image "940x460" crop="top" as im %}
+                                <img alt="" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                            {% endthumbnail %}
+                            <p class="flex-caption">
+                                <strong>{{ slide.title }}</strong>
+                                <span>{{ slide.description }}</span>
+                            </p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock slider %}
+
+{% block portfolio %}
+    <div class="portfolio">
+        <p class="all_projects"><a href="#">View all projects</a></p>
+        <h1>Portfolio</h1>
+        <div class="columns">
+
+            {% for work in works_list %}
+                <div class="column column25">
+                    <a href="{{ work.photo_set.first.image.url }}" class="image lightbox" data-rel="prettyPhoto[gallery]">
+                        <span class="inside">
+                            {% thumbnail work.photo_set.first.image "197x140" crop="top" as im %}
+                                <img alt="" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                            {% endthumbnail %}
+                            <span class="caption">{{ work.description_short }}</span>
+                        </span>
+                        <span class="image_shadow"></span>
+                    </a>
+                </div>
+            {% endfor %}
+
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="underline"></div>
+{% endblock %}

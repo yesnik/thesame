@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load articles_extras %}
+{% load blocks_extras %}
+
+{% block content %}
+
+    <h1 class="page_title">{% block page_title %}Блог{% endblock %}</h1>
+    {% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <div class="inside">
+            <a class="first" href="/"><span>Главная</span></a>
+            <a class="last last-child" href="{% url 'articles:article_list' %}"><span>Блог</span></a>
+        </div>
+    </div>
+    {% endblock %}
+
+    <div class="columns">
+        <div class="column column75">
+            {% block article_content %}
+                <article class="article">
+                    {% article_short article %}
+                    <h1>{{ article.title }}</h1>
+                    {{ article.content|safe }}
+                </article>
+            {% endblock %}
+        </div>
+        <div class="column column25">
+            <div class="padd16bot">
+                <h1>Search</h1>
+                <form class="searchbar">
+                <fieldset>
+                    <div>
+                        <span class="input_text"><input type="text" class="clearinput" value="Search..."></span>
+                        <button class="input_submit" type="button"><span>Search</span></button>
+                    </div>
+                </fieldset>
+                </form>
+            </div>
+
+            <div class="padd16bot">
+                <h3>Recent Posts</h3>
+                <ul class="recent_posts">
+                    {% block posts_list_recent %}
+                        {% for article in articles_list_recent %}
+                            {% article_recent article %}
+                        {% endfor %}
+                    {% endblock %}
+                </ul>
+            </div>
+
+            <div class="padd16bot">
+                {% show_block 'about_us' %}
+            </div>
+
+            <div class="padd16bot">
+                <h1>Categories</h1>
+                <ul class="menu categories page_text">
+                    <li><a href="#">Webdesign (8)</a></li>
+                    <li>
+                        <a href="#">Branding (12)</a>
+                        <ul>
+                            <li><a href="#">Photography (45)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Photomanipulation (5)</a></li>
+                    <li><a href="#">3D (1)</a></li>
+                    <li><a href="#">Others (7)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+            

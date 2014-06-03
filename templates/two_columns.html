@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load articles_extras %}
+{% load blocks_extras %}
+{% load thumbnail %}
+{% load staticfiles %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{% static 'js/comments.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="page_title">{% block page_title %}Контакты{% endblock %}</h1>
+    {% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <div class="inside">
+            <a class="first" href="/"><span>Главная</span></a>
+            <a class="last last-child" href="{% url 'contacts' %}"><span>Контакты</span></a>
+        </div>
+    </div>
+    {% endblock %}
+
+
+
+    <div class="columns">
+        <div class="column column75">
+            {{ page.content|safe }}
+
+            {% include 'feedback/feedback_form.html' %}
+
+        </div>
+        <div class="column column25">
+
+            <div class="padd16bot">
+                {% show_block 'contacts' %}
+            </div>
+
+            <div class="padd16bot">
+                {% show_block 'about_us' %}
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+            

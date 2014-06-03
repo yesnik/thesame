@@ -1,0 +1,17 @@
+<div class="column column25">
+    <div class="table">
+        <div class="header">
+            <h3>{{ tariff.title|safe }}</h3>
+        </div>
+        <div class="price">
+            <p>{{ tariff.price }}</p>
+        </div>
+        <div class="content">
+            {{ tariff.content|safe }}
+        </div>
+        <a href="#" class="button button_small button_orange"><span class="inside">sign up</span></a>
+        {% if tariff.is_best %}
+            <div class="order_bestvalue"></div>
+        {% endif %}
+    </div>
+</div>

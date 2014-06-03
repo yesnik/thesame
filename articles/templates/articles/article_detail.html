@@ -1,0 +1,38 @@
+﻿{% extends 'articles_base.html' %}
+
+{% load articles_extras %}
+{% load thumbnail %}
+{% load threadedcomments_tags %}
+{% load staticfiles %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{% static 'js/comments.js' %}"></script>
+{% endblock %}
+
+{% block article_content %}
+    <article class="article">
+        {% article_short article %}
+        <h1>{{ article.title }}</h1>
+        {{ article.content|safe }}
+
+        {% render_comment_list for article %}
+        {% render_comment_form for article %}
+
+        <!--
+        <div id="wrap_write_comment">
+            <div id="form-comment">
+                {% get_comment_form for article as form %}
+                <form action="/comments/post/" method="post">{% csrf_token %}
+                    {{ form.as_p }}{# just to keep the example simple. Consider using django-crispy-forms in real life #}
+
+                    <p>
+                      <input type="submit" value="Submit Comment"/>
+                      <a href="#c0" id="cancel_reply">cancel reply</a>
+                    </p>
+                </form>
+            </div>
+        </div> -->
+
+    </article>
+{% endblock %}
+       

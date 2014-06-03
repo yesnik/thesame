@@ -1,0 +1,55 @@
+<div id="wrap_write_comment">
+    <div id="form-comment">
+
+        <form action="/comments/post/" class="contactform ajaxform" method="post">
+            {% csrf_token %}
+
+            {# just to keep the example simple. Consider using django-crispy-forms in real life #}
+            <div class="columns">
+                <div class="column column25">
+                    {{ form.name.label_tag }}
+                    <span class="input_text">
+                    {% if request.user.get_full_name %}
+                        <input type="text" name="user" id="id_user" value="{{ request.user.get_full_name }}">
+                    {% else %}
+                       {{ form.name }}
+                    {% endif %}
+                    </span>
+                </div>
+                <div class="column column25">
+                    {{ form.email.label_tag }}
+                    <span class="input_text">
+                    {% if request.user %}
+                        <input type="email" name="email" id="id_email" value="{{ request.user.email }}">
+                    {% else %}
+                        {{ form.email }}
+                    {% endif %}
+                    </span>
+                </div>
+                <div class="column column25">
+                    {{ form.title.label_tag }}
+                    <span class="input_text">{{ form.title }}</span>
+                </div>
+            </div>
+            <div class="columns">
+                    {{ form.comment.label_tag }}
+                <span class="input_textarea">
+                    {{ form.comment }}
+                </span>
+            </div>
+            <button type="submit" class="button_container">
+                <span class="button button_small button_orange">
+                    <span class="inside">Отправить</span>
+                </span>
+                <a href="#c0" id="cancel_reply">Отменить ответ</a>
+            </button>
+            {{ form.object_pk }}
+            {{ form.content_type }}
+            {{ form.errorlist }}
+            {{ form.timestamp }}
+            {{ form.security_hash }}
+            {{ form.parent }}
+
+        </form>
+    </div>
+</div>

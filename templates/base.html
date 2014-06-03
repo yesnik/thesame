@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	
+	<title>The Same</title>
+	{% load staticfiles %}
+    {% load articles_extras %}
+    {% load blocks_extras %}
+    {% load tariffs_extras %}
+    {% load menutree_extras %}
+    
+    {% menutree main_menu %}
+
+
+	<link rel="stylesheet" href="{% static 'css/reset.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/light.css' %}" title="light" type="text/css" />
+	<link rel="alternate stylesheet" href="{% static 'css/dark.css' %}" title="dark" type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/prettyPhoto.css' %}" type="text/css" />
+
+
+	<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.ui.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.flexslider.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.prettyphoto.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.stylesheettoggle.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/onload.js' %}"></script>
+
+    <style type="text/css">
+        li ul {
+            padding-left: 40px;
+        }
+    </style>
+
+	<!--[if IE]>
+	<script type="text/javascript" src="{% static 'js/html5.js' %}"></script>
+	<![endif]-->
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/ie7.css' %}" />
+	<![endif]-->
+    {% block javascript %}
+
+    {% endblock %}
+<meta charset="UTF-8"></head>
+<body>
+
+<!-- BEGIN STYLESHEET SWITCHER -->
+<div id="stylesheet_switcher">
+	<a href="#" id="switcher"></a>
+	<ul id="stylesheets">
+		<li>
+			<a href="#" class="sheet" id="light">
+				<span class="image"><img src="{% static 'gfx/stylesheet_light.jpg' %}" alt="" /></span>
+				<span class="mask"></span>
+				<span class="name">Light version</span>
+			</a>
+		</li>
+		<li>
+			<a href="#" class="sheet" id="dark">
+				<span class="image"><img src="{% static 'gfx/stylesheet_dark.jpg' %}" alt="" /></span>
+				<span class="mask"></span>
+				<span class="name">Dark version</span>
+			</a>
+		</li>
+	</ul>
+</div>
+<!-- END STYLESHEET SWITCHER -->
+
+<!-- BEGIN PAGE -->
+<div id="page">
+	<div id="page_top">
+	<div id="page_top_in">
+		<!-- BEGIN TITLEBAR -->
+		<header id="titlebar">
+			<div class="wrapper">
+				<a id="logo" href="#"><span></span></a>
+				<div id="titlebar_right">
+					<ul id="social_icons">
+						<li><a href="#" class="linkedin"></a></li>
+						<li><a href="#" class="facebook"></a></li>
+						<li><a href="#" class="twitter"></a></li>
+						<li><a href="#" class="rss"></a></li>
+					</ul>
+					<div class="clear"></div>
+
+					<nav>
+						<ul id="top_menu">
+
+                            {% for item in menutree_items %}
+                                <li {% if item.current %}class='current'{% endif %}>
+                                    <a href="{{ item.link_url}}" title="{{ item.title|escape }}">
+                                        {{ item.title }}
+                                    </a>
+
+                                    {% if item.children %}
+                                        <div class="submenu">
+                                            <ul>
+                                                {% for child in item.children %}
+                                                <li {% if child.current %}class='current'{% endif %}>
+                                                    <a href="{{ child.link_url }}" title="{{ child.title|escape }}">
+                                                        <span>{{ child.title }}</span>
+                                                    </a>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+
+                            {% for item in menuitems %}
+                                <!-- <li {% if item.current %}class='current'{% endif %}>
+                                    <a href="{{ item.url }}" title="{{ item.title|escape }}">
+                                        {{ item.title }}
+                                    </a>
+                                </li>
+                                -->
+
+                                
+                            {% endfor %}
+
+                            <!--
+							<li class="current"><a href="./index.htm.html">Home</a></li>
+							<li><a href="./aboutus.htm.html">About Us</a></li>
+							<li><a href="./blog.htm.html">Blog</a></li>
+							<li>
+								<a href="#">Other</a>
+								<div class="submenu">
+								<ul>
+									<li><a href="./blog-article.htm.html"><span>Single Blog</span></a></li>
+									<li><a href="./shortcodes-columns.htm.html"><span>Columns</span></a></li>
+									<li><a href="./shortcodes-elements.htm.html"><span>Elemantary</span></a></li>
+									<li><a href="./shortcodes-boxes.htm.html"><span>Boxes</span></a></li>
+									<li><a href="./shortcodes-typography.htm.html"><span>Typography</span></a></li>
+								</ul>
+								</div>
+							</li>
+							<li>
+								<a href="./portfolio-single.htm.html">Portfolio</a>
+								<div class="submenu">
+								<ul>
+									<li><a href="./portfolio.htm.html#all"><span>All categories</span></a></li>
+									<li><a href="./portfolio.htm.html#photography"><span>Photography</span></a></li>
+									<li><a href="./portfolio.htm.html#webdesign"><span>Webdesign</span></a></li>
+									<li><a href="./portfolio.htm.html#branding"><span>Branding</span></a></li>
+								</ul>
+								</div>
+							</li>
+							<li><a href="./gallery.htm.html">Gallery</a></li>
+							<li><a href="./contact.htm.html">Contact</a></li>
+                            -->
+						</ul>
+					</nav>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</header>
+		<!-- END TITLEBAR -->
+		
+		<!-- BEGIN TOP -->
+        {% block slider %}
+
+        {% endblock %}
+		<!-- END TOP -->
+		
+		<!-- BEGIN CONTENT -->
+		<section id="content">
+			<div class="wrapper page_text page_home">
+				{% block content %}
+                <div class="introduction">
+                    {% show_block 'introduction' %}
+                    <a class="button button_big button_orange float_left"><span class="inside">read more</span></a>
+                </div>
+
+                <ul class="columns dropcap">
+                    <li class="column column33 first">
+                        <div class="inside">
+                            <h1>Dropcap</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Primis in faucibus lorem. Curabitur ultrices interdum. Integer adipiscing dictum enim.</p>
+                            <p class="read_more"><a href="#">Read more</a></p>
+                        </div>
+                    </li>
+                    <li class="column column33 second">
+                        <div class="inside">
+                            <h1>Lorem ipsum</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Primis in faucibus lorem. Curabitur ultrices interdum. Integer adipiscing dictum enim.</p>
+                            <p class="read_more"><a href="#">Read more</a></p>
+                        </div>
+                    </li>
+                    <li class="column column33 third">
+                        <div class="inside">
+                            <h1>Dolor sit!</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Primis in faucibus lorem. Curabitur ultrices interdum. Integer adipiscing dictum enim.</p>
+                            <p class="read_more"><a href="#">Read more</a></p>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="columns iconcap">
+                    <li class="column column33 inews">
+                        <div class="inside">
+                            <h1>iCon</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Primis in faucibus lorem. Curabitur ultrices interdum. Integer adipiscing dictum enim.</p>
+                            <p class="read_more"><a href="#">Read more</a></p>
+                        </div>
+                    </li>
+                    <li class="column column33 italk">
+                        <div class="inside">
+                            <h1>iTalk</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Primis in faucibus lorem. Curabitur ultrices interdum. Integer adipiscing dictum enim.</p>
+                            <p class="read_more"><a href="#">Read more</a></p>
+                        </div>
+                    </li>
+                    <li class="column column33 icon">
+                        <div class="inside">
+                            <h1>iNews</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Primis in faucibus lorem. Curabitur ultrices interdum. Integer adipiscing dictum enim.</p>
+                            <p class="read_more"><a href="#">Read more</a></p>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="underline"></div>
+                
+                {% block portfolio %}
+
+                {% endblock %}
+
+                <div class="pricing_tables">
+                    <div class="columns">
+                        {% for tariff in tariffs_list %}
+                            {% show_tariff tariff %}
+                        {% endfor %}
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                
+                {% endblock %}
+			</div>
+		</section>
+		<!-- END CONTENT -->
+	</div>
+	</div>
+	
+	<div id="page_bottom">
+		<!-- BEGIN ABOVE_FOOTER -->
+		<section id="above_footer">
+			<div class="wrapper above_footer_boxes page_text">
+				<div class="box first">
+                    {% show_block 'about_us' %}
+				</div>
+
+				<div class="box second">
+					<h3>Recent Posts</h3>
+					<ul class="recent_posts">
+                        {% block posts_list_recent %}
+                            {% for article in articles_list_recent %}
+                                {% article_recent article %}
+                            {% endfor %}
+                        {% endblock %}
+					</ul>				
+				</div>
+
+				<div class="box third">
+					<h3>Categories</h3>
+					<ul class="menu categories page_text">
+						<li><a href="#">Webdesign (8)</a></li>
+						<li>
+							<a href="#">Branding (12)</a>
+							<ul>
+								<li><a href="#">Photography (45)</a></li>
+							</ul>
+						</li>
+						<li><a href="#">Photomanipulation (5)</a></li>
+						<li><a href="#">3D (1)</a></li>
+						<li><a href="#">Others (7)</a></li>
+					</ul>
+				</div>
+
+				<div class="box fourth">
+					{% show_block 'contact_us' %}
+				</div>
+			</div>
+		</section>
+		<!-- END ABOVE_FOOTER -->
+		
+		<!-- BEGIN FOOTER -->
+		<footer id="footer">
+			<div class="wrapper">
+				<p class="copyrights">Copyright &copy; 2012-{% now 'Y' %} by TheSame. All rights reserved.</p>
+				<a href="#page" class="up">
+					<span class="arrow"></span>
+					<span class="text">top</span>
+				</a>
+			</div>
+		</footer>
+		<!-- END FOOTER -->
+	</div>
+</div>
+
+</body>
+</html>

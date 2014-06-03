@@ -1,0 +1,9 @@
+*.pyc
+*.sqlite3
+verstka/
+uploads/
+media/
+menu/
+mptt/
+sorl/
+site_cache/

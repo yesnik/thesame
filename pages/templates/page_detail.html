@@ -1,0 +1,21 @@
+﻿{% extends 'articles_base.html' %}
+
+{% block page_title %}
+    {{ page.title }}
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="inside">
+        <a class="first" href="/"><span>Главная</span></a>
+        <a class="last last-child" href="{% url 'page_detail' page.slug %}"><span>О нас</span></a>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block article_content %}
+
+<p>{{ page.content|safe }}</p>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% load thumbnail %}
+{% load threadedcomments_tags %}
+
+<div class="article_image nomargin">
+    <div class="inside">
+        {% thumbnail article.pic "689x214" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        {% endthumbnail %}
+    </div>
+</div>
+<div class="article_details">
+    <ul class="article_author_date">
+        <li><em>Добавлен: </em>{{ article.created|date:'d.m.Y' }}</li>
+        <li><em>Автор(ы): </em> 
+            <a href="#">{{ article.author.all|join:", " }}</a>
+        </li>
+    </ul>
+    <p class="article_comments">
+        <em>Комментариев:</em>
+        {% get_comment_count for article as num_comments %}
+        {{ num_comments }}
+    </p>
+</div>

@@ -1,0 +1,103 @@
+﻿{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% load articles_extras %}
+{% load blocks_extras %}
+
+{% block content %}
+
+    <h1 class="page_title">Blog</h1>
+
+    <div class="breadcrumbs">
+        <div class="inside">
+            <a class="first" href="/"><span>Главная</span></a>
+            <a class="last last-child" href="{% url 'articles:article_list' %}"><span>Блог</span></a>
+        </div>
+    </div>
+
+    <div class="columns">
+        <div class="column column75">
+            {% for article in article_list %}
+                <article class="article">   
+                    {% article_short article %}
+                    <h1>{{ article.title }}</h1>
+                    {{ article.content|safe }}
+                    
+                    <a class="button button_small button_orange float_left" 
+                        href="{% url 'articles:article_detail' article.id %}">
+                        <span class="inside">Подробнее</span>
+                    </a>
+                </article>
+            {% endfor %}
+
+            
+
+            <div class="pagination">
+
+                {% if article_list.has_previous %}
+                    <a href="?page={{ article_list.previous_page_number }}">&larr;</a>
+                {% endif %}
+
+                {% for num in article_list.paginator.page_range %}
+                    {% if num == article_list.number %}
+                        <span class="current"><b>{{ num }}</b></span>
+                    {% else %}
+                        <a href="?page={{ num }}"> {{ num }}</a>
+                    {% endif %} 
+                {% endfor %}
+
+                {% if article_list.has_next %}
+                    <a href="?page={{ article_list.next_page_number }}">&rarr;</a>
+                {% endif %}
+
+            </div>
+
+        </div>
+        
+        <div class="column column25">
+            <div class="padd16bot">
+                <h1>Search</h1>
+                <form class="searchbar">
+                <fieldset>
+                    <div>
+                        <span class="input_text"><input type="text" value="Search..." class="clearinput"></span>
+                        <button class="input_submit" type="button"><span>Search</span></button> 
+                    </div>
+                </fieldset>
+                </form>
+            </div>
+
+            <div class="padd16bot">
+                <h1>Recent Posts</h1>
+                <ul class="recent_posts">
+                    {% block posts_list_recent %}
+                        {% for article in articles_list_recent %}
+                            {% article_recent article %}
+                        {% endfor %}
+                    {% endblock %}
+                </ul>   
+            </div>
+            
+            <div class="padd16bot">
+                {% show_block 'about_us' %}
+            </div>
+            
+            <div class="padd16bot">
+                <h1>Categories</h1>
+                <ul class="menu categories page_text">
+                    <li><a href="#">Webdesign (8)</a></li>
+                    <li>
+                        <a href="#">Branding (12)</a>
+                        <ul>
+                            <li><a href="#">Photography (45)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Photomanipulation (5)</a></li>
+                    <li><a href="#">3D (1)</a></li>
+                    <li><a href="#">Others (7)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
